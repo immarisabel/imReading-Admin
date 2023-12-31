@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<body>
+
+<div th:fragment="readingData" class="reading-data-form">
+    <h2>imReading...</h2>
+<form th:action="@{'/admin/reading-data/add'}" method="post" th:object="${readingData}">
+    <input type="hidden" id="isbn" th:field="*{bookIsbn}" th:value="${readingData.bookIsbn}" /><br/>
+    <div>
+        <label for="startDate">Started Date:</label>
+        <input type="date" id="startDate" th:field="*{startedDate}" />
+    </div>
+    <div>
+        <label for="finishedDate">Finished Date:</label>
+        <input type="date" id="finishedDate" th:field="*{finishedDate}" />
+    </div>
+    <div>
+        <label for="status">Status:</label>
+        <select id="status" th:field="*{status}">
+            <option value="NEW">NEW</option>
+            <option value="READING">READING</option>
+            <option value="FINISHED">FINISHED</option>
+            <option value="NTF">NTF</option>
+        </select>
+    </div>
+
+    <div>
+        <label for="currentPage">Current Page:</label>
+        <input type="number" id="currentPage" th:field="*{currentPage}" />
+    </div>
+    <div>
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" th:field="*{rating}" />
+    </div>
+
+    <div>
+
+        <label>
+            <input type="checkbox" class="heart-label" id="heartCheckbox" name="heart" th:checked="${favorite}">
+            <i class="material-icons">favorite</i>
+        </label>
+
+
+    </div>
+
+
+
+    <div>
+        <button type="submit">save</button>
+    </div>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+          // Add event listener to toggle the heart icon
+          document.getElementById('heartCheckbox').addEventListener('change', function() {
+            var heartIcon = this.nextElementSibling; // Get the <i> element
+
+            if (this.checked) {
+              heartIcon.style.color = '#E74C3C'; // Change color when checked
+            } else {
+              heartIcon.style.color = 'inherit'; // Reset to default color when unchecked
+            }
+          });
+        /*]]>*/
+    </script>
+</form>
+</div>
+</body>
+</html>
+
+
+
+
+

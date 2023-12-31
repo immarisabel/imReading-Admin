@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<h1>Shelves</h1>
+
+<table id="shelfTable">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Books</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody id="shelfTableBody">
+    </tbody>
+</table>
+
+<script>
+    $(document).ready(function () {
+        loadShelfData();
+    });
+
+function loadShelfData() {
+    // Fetch shelfBookCountMap first
+    $.ajax({
+        type: 'GET',
+        url: '/public/book/count-shelved-books',
+        success: function (shelfBookCountMap) {
+            console.log('Shelf Book Count Map:', shelfBookCountMap);
+            // Once the book count map is fetched, make the main request to get shelf data
+            $.ajax({
+                type: 'GET',
+                url: '/admin/shelf/list',
+                success: function (data) {
+                    addDataToTable(data, shelfBookCountMap);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Failed to load shelf data:', error);
+                }
+            });
+        },
+        error: function (xhr, status, error) {
+            console.error('Failed to load book count map:', error);
+        }
+    });
+}
+
+
+    function addDataToTable(data, shelfBookCountMap) {
+        var tableBody = $('#shelfTableBody');
+        tableBody.empty();
+        data.forEach(function (shelf) {
+            var bookCount = shelf.id in shelfBookCountMap ? shelfBookCountMap[shelf.id] : 0;
+            var row = '<tr>' +
+                '<td>' + shelf.shelfName + '</td>' +
+                '<td>' + bookCount + '</td>' +
+                '<td>' +
+                '<button onclick="deleteShelf(\'' + shelf.shelfName + '\')">Delete</button>' +
+                '<a href="/admin/shelf/update/' + shelf.shelfName + '"><button onclick="updateShelf(\'' + shelf.shelfName + '\')">Update</button></a>' +
+                '</td>' +
+                '</tr>';
+            tableBody.append(row);
+        });
+    }
+
+    function deleteShelf(shelfName) {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/shelf/delete/' + shelfName,
+            success: function () {
+                loadShelfData();
+            },
+            error: function (xhr, status, error) {
+                if (xhr.status === 400) {
+                } else {
+                    console.error('Failed to delete shelf:', error);
+                    alert('Please remove books from the shelf before deleting.');
+                }
+            }
+        });
+    }
+</script>
+
+
+</body>
+</html>

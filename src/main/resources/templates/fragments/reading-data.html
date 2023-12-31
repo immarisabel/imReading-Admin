@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<div th:fragment="reading-data">    
+    <p id="startedDate"></p>
+    <p id="finishedDate"></p>
+    <p id="status"></p>
+    <p id="currentPage"></p>
+    <p id="rating"></p>
+    <p id="favorite"></p>
+
+    <script th:inline="javascript">
+       function getReadingData(){
+           var isbn = window.location.pathname.split("/").pop(); // Get ISBN from URL path
+
+           fetch("/public/reading-data/" + isbn)
+                .then(response => response.json())
+                .then(data => {
+
+                    var progress = document.getElementById("currentPage");
+                    progress.value = data.currentPage; 
+
+                    console.log("Updated progress value:", progress.value); 
+
+                    document.getElementById("startedDate").innerHTML = "Started Date: " + data.startedDate;
+                    document.getElementById("finishedDate").innerHTML = "Finished Date: " + data.finishedDate;
+                    document.getElementById("status").innerHTML = "Status: " + data.status;
+                    document.getElementById("rating").innerHTML = "Rating: " + data.rating;
+                    document.getElementById("favorite").innerHTML = "Favorite: " + data.favorite;
+                });
+       }
+    </script>
+</div>

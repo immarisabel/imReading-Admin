@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book List</title>
+</head>
+<body>
+<h1>Review List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>ISBN</th>
+        <th>Date</th>
+        <th>Review</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+        <td th:text="${review.bookIsbn}"></td>
+        <td th:text="${review.date}"></td>
+        <td th:text="${review.review}"></td>
+        <td>
+            <a th:href="@{/public/book/{isbn}(isbn=${book.isbn})}">
+                <button>View Book</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

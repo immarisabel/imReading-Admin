@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<div th:fragment="bookList">
+    <table>
+        <thead>
+            <tr>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Pages</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="bookTableBody"></tbody>
+    </table>
+
+    <script>
+        function loadBooks() {
+            var bookTableBody = document.getElementById("bookTableBody");
+            var booksList = /*[[${booksList}]]*/ []; // Fetch the booksList from Thymeleaf model
+
+            booksList.forEach(book => {
+                var row = document.createElement("tr");
+
+                // Author
+                var authorCell = document.createElement("td");
+                authorCell.textContent = book.author;
+                row.appendChild(authorCell);
+
+                // Title
+                var titleCell = document.createElement("td");
+                titleCell.textContent = book.title;
+                row.appendChild(titleCell);
+
+                // Pages
+                var pagesCell = document.createElement("td");
+                pagesCell.textContent = book.pages;
+                row.appendChild(pagesCell);
+
+                // Status
+                var statusCell = document.createElement("td");
+                statusCell.textContent = book.readingData.status;
+                row.appendChild(statusCell);
+
+                // Add the row to the table body
+                bookTableBody.appendChild(row);
+            });
+        }
+    </script>
+</div>
+</html>

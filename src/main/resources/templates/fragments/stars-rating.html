@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="stars">
+        <div class="star-container">
+            <div th:each="starNumber : ${#numbers.sequence(1, 5)}" 
+                 class="star-${starNumber}">
+                <i th:class="${starNumber <= readingData.rating ? 'fa fa-star checked' : 'fa fa-star'}" 
+                   aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+    

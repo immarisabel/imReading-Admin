@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:fragment="review">
+    <h2 id="title" class="card-title"></h2>
+    <h3 id="date" style="text-align: end;"></h3>
+
+    <p id="review"></p>
+
+    <button id="reviewBtn" class="mt-3 button-secondary">Edit Review</button>
+
+    <script th:inline="javascript">
+        function getReview() {
+            var isbn = window.location.pathname.split("/").pop();
+
+            fetch("/public/review/" + isbn)
+                .then(response => response.json())
+                .then(data => {
+                    // Parse the date
+                    var reviewDate = new Date(data.date);
+
+                    // Format the date in different styles
+                    var shortDate = reviewDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+
+                    document.getElementById("title").innerHTML = "Book Review";
+                    document.getElementById("date").innerHTML = shortDate;
+                    document.getElementById("review").innerHTML = data.review;
+
+                    // Add event listener to the "Edit Review" button
+                    var editButton = document.getElementById("reviewBtn");
+                    editButton.addEventListener("click", function() {
+                        // Redirect to the update page if a review exists, otherwise to the add page
+                        window.location.href = data.review ? "/admin/review/update/" + isbn : "/admin/review/add/" + isbn;
+                    });
+                })
+                .catch(error => {
+                    // If no review is found, show a button to add
+                    var addButton = document.createElement("button");
+                    addButton.textContent = "Add Review";
+                    addButton.addEventListener("click", function () {
+                        // Redirect to the add review page
+                        window.location.href = "/admin/review/add/" + isbn;
+                    });
+
+                    // Append the button to the container
+                    var container = document.getElementById("review");
+                    container.innerHTML = ""; // Clear existing content
+                    container.appendChild(addButton);
+                });
+        }
+    </script>
+</div>

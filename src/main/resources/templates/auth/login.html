@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chart View</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+      body {
+        background: #eef1f5;
+        background-size: cover;
+        font-family: "Roboto";
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      body::before {
+        z-index: -1;
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: #eef1f5;
+        /* IE Fallback */
+        background: rgba(rgba(238, 241, 245, 1));
+        width: 100%;
+        height: 100%;
+      }
+      .form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        background: #fff;
+        width: 285px;
+        margin: -140px 0 0 -182px;
+        padding: 40px;
+        box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+      }
+      .form h2 {
+        margin: 0 0 20px;
+        line-height: 1;
+        color: #44c4e7;
+        font-size: 18px;
+        font-weight: 400;
+      }
+      .form input {
+        outline: none;
+        display: block;
+        width: 100%;
+        margin: 0 0 20px;
+        padding: 10px 15px;
+        border: 1px solid #ccc;
+        color: #ccc;
+        font-family: "Roboto";
+        box-sizing: border-box;
+        font-size: 14px;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transition: 0.2s linear;
+      }
+      .form input:focus {
+        color: #333;
+        border: 1px solid #44c4e7;
+      }
+      .myButton {
+        background-color: #2F7AE5;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 2px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition-duration: 0.4s;
+      }
+      .myButton:hover {
+        background-color: #f4a4a4;
+        color: white;
+      }
+      .error,
+      .valid {
+        display: none;
+      }
+      .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+      .form-control::-ms-expand {
+        background-color: transparent;
+        border: 0;
+      }
+      .form-control:focus {
+        color: #495057;
+        background-color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+      .form-control::-webkit-input-placeholder {
+        color: #6c757d;
+        opacity: 1;
+      }
+      .form-control::-moz-placeholder {
+        color: #6c757d;
+        opacity: 1;
+      }
+      .form-control:-ms-input-placeholder {
+        color: #6c757d;
+        opacity: 1;
+      }
+      .form-control::-ms-input-placeholder {
+        color: #6c757d;
+        opacity: 1;
+      }
+      .form-control::placeholder {
+        color: #6c757d;
+        opacity: 1;
+      }
+      .form-control:disabled,
+      .form-control[readonly] {
+        background-color: #e9ecef;
+        opacity: 1;
+      }
+</style>
+
+<body>
+
+
+<section class="form">
+    <H1>AMO!</H1>
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <p></p>
+    <form th:action="@{/login}" method="post">
+        <input class="form-control" type="text" name="username" placeholder="username"/>
+        <input class="form-control" type="password" name="password" placeholder="password"/>
+        <input class="myButton" type="submit" value="Sign In"/>
+    </form>
+</section>
+
+
+<!--<div th:if="${param.error}">-->
+<!--    Invalid username and password.-->
+<!--</div>-->
+<!--<div th:if="${param.logout}">-->
+<!--    You have been logged out.-->
+<!--</div>-->
+
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <div><label> User Name : <input type="text" name="username"/> </label></div>-->
+<!--    <div><label> Password: <input type="password" name="password"/> </label></div>-->
+<!--    <div><input type="submit" value="Sign In"/></div>-->
+<!--</form>-->
+
+</body>
+</html>

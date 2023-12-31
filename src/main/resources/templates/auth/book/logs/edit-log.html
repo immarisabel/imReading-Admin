@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:insert="~{fragments/header :: head}"></div>
+
+<!--Add here always what needs to load-->
+<body onload="populateDropdown(); ">
+<main class="grid-container-fullwidth">
+    <header class="grid-item">
+       <a href="/home"> <img src="/logo.svg" class="logo"> </a>
+        <nav th:replace="~{fragments/nav :: navFragment}"></nav>
+    </header>
+    <section id="content" class="grid-item double-height">
+        <!-- START OF CONTENT-->
+<div th:fragment="edit-log" class="reading-data-form">
+    <div id="edit-log-container"></div>
+    <form th:action="@{'/admin/log/update/' + ${log.id}}" method="post" th:object="${log}">
+        <!-- ID Field -->
+        <input type="hidden" id="id" name="id" th:value="${log?.id}" />
+
+        <!-- ISBN Field -->
+        <input type="hidden" id="isbn" name="isbn" th:value="${log.isbn}" />
+
+        <!-- Date Field -->
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" th:value="${log.date}" />
+
+        <!-- Page Field -->
+        <label for="page">Page:</label>
+        <input type="number" id="page" name="page" th:value="${log.page}" />
+
+        <!-- Favorite Field -->
+        <label for="favorite">Favorite:</label>
+        <input type="checkbox" id="favorite" name="favorite" th:checked="${log.favorite}" />
+
+        <!-- Log Field -->
+        <label for="log">Log:</label>
+        <textarea id="log" name="log" th:text="${log.log}"></textarea>
+
+        <button type="submit">Update</button>
+    </form>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        document.addEventListener("DOMContentLoaded", function () {
+            function updateFormAction() {
+                var logId = window.location.pathname.split("/").pop();
+
+                document.getElementById('id').value = logId;
+            }
+
+            updateFormAction();
+        });
+        /*]]>*/
+    </script>
+
+</div>
+</body>
+</html>

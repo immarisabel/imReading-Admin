@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+<div th:fragment="search">
+
+
+
+    <form th:action="@{/admin/search}" method="post">
+        <input type="text" placeholder="search for a book" id="searchQuery" name="query" required>
+        <button type="submit">Search</button>
+    </form>
+
+
+
+
+</div>

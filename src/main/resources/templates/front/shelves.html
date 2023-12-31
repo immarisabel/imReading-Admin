@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Page List</title>
+</head>
+<body>
+<h1>Page List</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Shelf Name / Id</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="shelf : ${shelves}">
+        <td th:text="${shelf.shelfName}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

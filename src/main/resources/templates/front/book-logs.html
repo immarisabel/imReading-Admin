@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Logs List</title>
+</head>
+<body>
+
+<div id="logs-container"></div>
+
+
+
+<script th:inline="javascript">
+    function getLogs() {
+        var isbn = window.location.pathname.split("/").pop();
+
+        fetch("/public/log/list/" + isbn)
+            .then(response => response.json())
+            .then(data => {
+                var logsContainer = document.getElementById("logs-container");
+                logsContainer.innerHTML = "";
+
+                if (data.length > 0) {
+                    var isLoggedIn = /* Add logic to check if the user is logged in */ true;
+
+                    data.forEach(function(log) {
+                        var logContainer = document.createElement("div");
+
+
+                        var logHeader = document.createElement("h3");
+                        logHeader.textContent = "Date: " + log.date + " | Page: " + log.page;
+                        logHeader.classList.add("mt-5");
+                        logContainer.appendChild(logHeader);
+
+                        var logText = document.createElement("p");
+                        logText.textContent = log.log + " - Favorite: " + log.favorite;
+                        logContainer.appendChild(logText);
+
+                        logsContainer.appendChild(logContainer);
+
+                        var deleteForm = document.createElement("form");
+                        deleteForm.method = "post";
+                        deleteForm.action = "/admin/log/delete/" + log.id;
+
+                        var logIdInput = document.createElement("input");
+                        logIdInput.type = "hidden";
+                        logIdInput.name = "logId";
+                        logIdInput.value = log.id;
+                        deleteForm.appendChild(logIdInput);
+
+                        logContainer.appendChild(deleteForm);
+
+                        var deleteButton = document.createElement("button");
+                        deleteButton.textContent = "Delete";
+                        deleteButton.addEventListener("click", function() {
+                            handleDelete(log.id);
+                        });
+                        logContainer.appendChild(deleteButton);
+
+                        if (isLoggedIn) {
+                            var editButton = document.createElement("button");
+                            editButton.textContent = "Edit";
+                            editButton.addEventListener("click", function() {
+                                openEditForm(log.id);
+                            });
+                            logContainer.appendChild(editButton);
+                        }
+                    });
+                } else {
+                    var noLogsMessage = document.createElement("h2");
+                    noLogsMessage.classList.add("mb-5", "background");
+                    noLogsMessage.textContent = "No logs found";
+                    logsContainer.appendChild(noLogsMessage);
+                }
+            });
+    }
+function handleDelete(logId) {
+    var deleteForm = document.querySelector("form[action='/admin/log/delete/" + logId + "']");
+    if (deleteForm) {
+        // Redirect to the current page
+        window.location.href = window.location.href;
+
+        // Submit the form directly without using fetch
+        setTimeout(function() {
+            deleteForm.submit();
+        }, 100); // Add a slight delay to ensure the redirect happens before form submission
+    }
+}
+
+
+
+function openEditForm(logId) {
+    // Check if logId is not null or undefined
+    if (logId != null) {
+        // Redirect to the edit form with the log ID
+        window.location.href = "/admin/log/edit/" + logId;
+    } else {
+        console.error("Invalid log ID");
+    }
+}
+
+    getLogs();
+</script>
+
+
+</body>
+</html>

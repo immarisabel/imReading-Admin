@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<div th:fragment="bookList">
+    <div class="book-container" id="booksWithStatusReading"></div>
+
+    <script>
+        function loadBooks() {
+            var bookGallery = document.getElementById("booksWithStatusReading");
+
+            fetch("/public/book/list")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    data.forEach(book => {
+                        var bookDiv = document.createElement("div");
+                        bookDiv.className = "book";
+
+                        // Create a link for viewing book details
+                        var detailsLink = document.createElement("a");
+                        detailsLink.href = `/public/book/${book.isbn}`;
+
+                        var bookCover = document.createElement("div");
+                        bookCover.className = "book-cover";
+                        bookCover.style.backgroundImage = `url(${book.thumbnailUrl})`;
+
+                        detailsLink.appendChild(bookCover);
+
+                        // Add the detailsLink to the bookDiv
+                        bookDiv.appendChild(detailsLink);
+
+                        // Add the bookDiv to the bookGallery
+                        bookGallery.appendChild(bookDiv);
+                    });
+                });
+        }
+
+
+    </script>
+
+
+</div>
+</html>

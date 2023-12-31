@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:insert="~{fragments/header :: head}"></div>
+
+<!--Add here always what needs to load-->
+<body onload="populateDropdown(); getReview(); getLogs();">
+
+<input type="hidden" id="isbn" th:value="${book.isbn}" />
+
+    <main class="grid-container-fullwidth">
+        <header class="grid-item">
+           <a href="/home"> <img src="/logo.svg" class="logo"> </a>
+            <nav th:replace="~{fragments/nav :: navFragment}"></nav>
+        </header>
+        <section id="content" class="grid-item double-height">
+            <!-- START OF CONTENT-->
+
+            <div class="favorite-container">
+                <th:block th:if="${readingData.bookIsbn != null and readingData.favorite}">
+        <span class="material-symbols-rounded">
+            favorite
+        </span>
+                </th:block>
+                <h1 th:text="${book.title}" class="book-title">Book title</h1>
+            </div>
+
+
+
+            <div class="book-card">
+                <div class="book-cover" th:style="'background-image: url(\'' + ${book.thumbnailUrl} + '\');'"></div>
+                <div class="details">
+                    <p>By: <span th:text="${book.author}"></span></p>
+                    <p>ISBN: <span th:text="${book.isbn}"></span></p>
+                    <th:block th:if="${readingData.bookIsbn != null and readingData.currentPage != null}">
+                        <progress class="progress is-small" id="currentPage" th:value="${readingData.currentPage}" th:max="${book.pages}"></progress>
+                    </th:block>
+
+                    <!-- Shelves -->
+                    <div class="book-shelves">
+                        <span th:each="shelf : ${shelves}" th:text="${shelf.shelfName}" class="book-shelf"></span>
+                    </div>
+
+
+
+                </div>
+                <div class="status">
+
+                <div  style="display: flexbox; flex-direction: column;">
+                    <!-- TODO not logged in = hide  -->
+                    <button id="showFormBtn">reading...</button>
+
+                    <div th:if="${readingData.bookIsbn != null}">
+                        <p><span class="book-dates" th:utext="'<strong>started:</strong> '+ ${readingData.startedDate}"
+                                style="flex-direction: row;"></span></p>
+                        <p><span class="book-dates" th:utext="'<strong>finished:</strong> '+ ${readingData.finishedDate}" style="flex-direction: row;"></span></p>
+
+                        <div th:if="${readingData.status == T(nl.marisabel.ConfettiCloudCmsFrontEnd.imreading.dto.ReadingStatus).FINISHED}" class="book-status-finished"></div>
+                        <div th:if="${readingData.status == T(nl.marisabel.ConfettiCloudCmsFrontEnd.imreading.dto.ReadingStatus).NEW}" class="book-status-new"></div>
+                        <div th:if="${readingData.status == T(nl.marisabel.ConfettiCloudCmsFrontEnd.imreading.dto.ReadingStatus).READING}" class="book-status-reading"></div>
+                        <div th:if="${readingData.status == T(nl.marisabel.ConfettiCloudCmsFrontEnd.imreading.dto.ReadingStatus).DNF}" class="book-status-dnf"></div>
+
+                        <th:block th:if="${readingData.rating}">
+                        <div th:insert="~{fragments/stars-rating :: stars}"></div>
+                        </th:block>
+
+
+                    </div>
+
+
+
+                </div>
+                </div>
+
+            </div>
+
+
+
+
+
+            </div>
+            <!--  REVIEW CONTAINER -->
+            <div class="container">
+                <div class="review">
+                    <div class="card-body">
+                     <div th:insert="~{front/review :: review}"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--  LOGS CONTAINER -->
+            <div class="container">
+                <div class="review-card">
+                    <div class="card-body">
+                        <!-- TODO not logged in = hide  -->
+                        <button id="showLogFormBtn" class="mb-2">add a log</button>
+
+                        <div th:insert="~{front/book-logs :: body}"></div>
+                    </div>
+                </div>
+            </div>
+<!-- TODO not logged in = hide  -->
+            <a th:href="@{/admin/book/update/{isbn}(isbn=${book.isbn})}">
+                <button>edit book</button>
+            </a>
+
+
+
+            <div id="overlay">
+                <div id="formContainer">
+                    <span class="close" onclick="closeForm()">&times;</span>
+                    <div th:replace="~{auth/book/reading-data/add-reading-data :: readingData}"></div>
+                </div>
+            </div>
+
+
+
+            <div id="overlay-logs">
+                <div id="formContainer-logs">
+                    <span class="close" onclick="closeForm()">&times;</span>
+                    <div th:replace="~{auth/book/logs/add-log :: add-log}"></div>
+                </div>
+            </div>
+
+
+            <!-- END OF CONTENT-->
+        </section>
+
+    </main>
+
+    <div th:insert="~{fragments/footer :: footer}"></div>
+
+
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+            overlay.style.display = 'none';
+
+            showFormBtn.addEventListener('click', toggleForm);
+
+            function toggleForm() {
+                overlay.style.display = (overlay.style.display === 'block') ? 'none' : 'block';
+            }
+
+            var closeBtn = overlay.querySelector('.close');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeForm);
+            }
+
+            function closeForm() {
+                overlay.style.display = 'none'; // Set display to 'none'
+            }
+    });
+</script>
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+        var overlayLogs = document.getElementById('overlay-logs');
+        overlayLogs.style.display = 'none';
+
+        var showLogFormBtn = document.getElementById('showLogFormBtn');
+        if (showLogFormBtn) {
+            showLogFormBtn.addEventListener('click', function () {
+                overlayLogs.style.display = (overlayLogs.style.display === 'block') ? 'none' : 'block';
+            });
+        }
+
+        var closeBtn = overlayLogs.querySelector('.close');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                overlayLogs.style.display = 'none';
+            });
+        }
+    });
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+<form th:action="@{/admin/shelf/} + (${shelf.id} != null ? 'update/' + ${shelf.shelfName} : 'add')"
+      th:object="${shelf}"
+      method="post">
+
+    <input type="hidden" th:field="*{id}" />
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{shelfName}" />
+
+    <button type="submit">
+        <span th:if="${shelf.id != null}">Update Shelf</span>
+        <span th:unless="${shelf.id != null}">Create Shelf</span>
+    </button>
+</form>
+
+
+</body>
+</html>

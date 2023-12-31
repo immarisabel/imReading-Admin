@@ -1,0 +1,36 @@
+
+
+:root {
+    --color-1: #FFB6C1;  
+    --color-2: var(--azure);
+    --color-3: var(--french-rose);
+
+    --white: #ffffff;
+    --black: #0a0830;  
+          
+    --text: #111111;
+    --light-text: #ffffff;
+    --headers: #ffffff; 
+    --subheader: #000000; 
+    --links:var(--color-3) ;
+    --accent: var(--pink);
+
+
+    --main-header-bg: var(--azure);
+    --sidebar-bg: var(--yellow);
+    --main-containers-bg: #ffffff;  
+    --page-bg: var(--azure);
+    /*--page-bg: #107CFEff;*/
+
+
+   
+        --azure: #107CFEff;
+        --french-rose: #E84D90ff;
+        --van-dyke: #443129ff;
+        --tan: #D2AE89ff;
+        --pink: #FFC0CBff;
+        --yellow: #FFFFCC;
+        --green: #86DC3D;
+        --red: #F81B3F;
+
+}

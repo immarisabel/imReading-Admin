@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<form th:action="@{/admin/page/add}" th:object="${page}" method="post">
+    <input type="hidden" th:field="*{id}" />
+    <label for="title">Title:</label>
+    <input type="text" id="title" th:field="*{title}" />
+
+    <label for="content">Content:</label>
+    <textarea id="content" th:field="*{content}"></textarea>
+
+    <button type="submit">Create Page</button>
+</form>
+
+</body>
+</html>

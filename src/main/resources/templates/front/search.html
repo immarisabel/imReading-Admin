@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:insert="~{fragments/header :: head}"></div>
+
+<!--Add here always what needs to load-->
+<body onload="populateDropdown();">
+
+<main class="grid-container-fullwidth">
+  <header class="grid-item">
+    <img src="/logo.svg" class="logo">
+    <nav th:replace="~{fragments/nav :: navFragment}"></nav>
+  </header>
+  <section id="content" class="grid-item double-height">
+    <!-- START OF CONTENT-->
+
+    <nav th:replace="~{fragments/search-book :: search}"></nav>
+
+
+    <!-- END OF CONTENT-->
+  </section>
+
+</main>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>
+
+

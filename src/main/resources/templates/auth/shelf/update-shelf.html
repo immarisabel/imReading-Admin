@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+<form th:action="@{/admin/shelf/update/{shelfName}(shelfName=${shelf.shelfName})}" th:object="${shelf}" method="post">
+    <hidden th:field="*{id}" />
+    <label for="shelfName">Name:</label>
+    <input type="text" id="shelfName" th:field="*{shelfName}" />
+    <button type="submit">Update Shelf</button>
+</form>
+</body>
+</html>

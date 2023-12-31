@@ -1,0 +1,114 @@
+/* Dropdown Styles
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100px;
+          }
+          
+          .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+          }
+          
+          .dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+          }
+          
+          .dropdown-content a:hover {
+            background-color: #FFDBCC;
+          }
+          
+          .dropdown:hover .dropdown-content {
+            display: block;
+            position: absolute;
+            right:0rem;
+            margin-right: 2rem;
+            top:5rem;
+          } */
+
+.mobile-screen {
+  display: none;
+}
+
+/* Styling the dropdown */
+.main-nav {
+  appearance: none;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #797979;
+  width: 200px;
+}
+
+/* Styling the dropdown arrow */
+.main-nav select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #666;
+}
+
+/* Styling the dropdown options */
+.main-nav option {
+  background-color: var(--sidebar-bg);
+  color: #333;
+}
+
+/* Styling the dropdown when it's open */
+.main-nav select:focus,
+.main-nav select:hover {
+  outline: none;
+  border-color: #999;
+}
+
+/* Button Style */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  width: 75%;
+  background-color: var(--main-containers-bg);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 5px;
+  font-family: "Barlow", sans-serif;
+  text-align: center;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.footer-links {
+  text-align: center;
+  list-style: none;
+  font-size: small;
+  margin-bottom: 2rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--text);
+  margin-left: 1rem;
+  padding: 0.5rem;
+  background-color: var(--sidebar-bg);
+  border-radius: 10px;
+}
+
+.footer-copy {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-size: small;
+  color: white;
+}

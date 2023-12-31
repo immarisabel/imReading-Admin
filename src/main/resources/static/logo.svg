@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 973 181" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="Artboard1" transform="matrix(1,0,0,1,-15.7792,-119.582)">
+        <rect x="15.779" y="119.582" width="972.562" height="180.418" style="fill:none;"/>
+        <clipPath id="_clip1">
+            <rect x="15.779" y="119.582" width="972.562" height="180.418"/>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g transform="matrix(11.6038,0,0,11.6038,-1933.95,-3302.1)">
+                <text x="184.222px" y="306.28px" style="font-family:'Gungsuh', serif;font-size:12px;fill:white;">imReading</text>
+            </g>
+            <g transform="matrix(1,0,0,1,-200.633,96.6061)">
+                <g id="Image">
+                    <g id="g6018">
+                        <ellipse id="path2016" cx="307.257" cy="113.767" rx="90.065" ry="90.209" style="fill:white;"/>
+                        <g id="g5989">
+                            <g id="g5900" transform="matrix(1,0,0,0.958636,200.385,3.09802)">
+                                <rect id="rect5894" x="61.193" y="103.137" width="89.922" height="62.629" style="fill:rgb(68,49,41);"/>
+                                <ellipse id="path5896" cx="105.866" cy="93.082" rx="44.674" ry="45.966" style="fill:rgb(68,49,41);"/>
+                                <path id="path5902" d="M61.049,94.662C61.193,105.723 61.336,105.866 61.336,105.866L150.971,106.154C150.971,106.154 151.115,94.375 149.965,86.905C148.816,79.436 61.049,94.662 61.049,94.662Z" style="fill:rgb(68,49,41);fill-rule:nonzero;"/>
+                            </g>
+                            <ellipse id="path2843" cx="306.107" cy="85.038" rx="30.309" ry="35.624" style="fill:rgb(255,233,198);fill-opacity:0.77;"/>
+                            <ellipse id="path2847" cx="282.981" cy="103.137" rx="9.768" ry="5.746" style="fill:rgb(244,107,129);fill-opacity:0.58;"/>
+                            <ellipse id="ellipse2849" cx="330.096" cy="105.148" rx="9.768" ry="5.746" style="fill:rgb(244,107,129);fill-opacity:0.58;"/>
+                            <g id="g5851">
+                            </g>
+                            <g id="g5910" transform="matrix(1,0,0,1,200.816,3.73477)">
+                                <path id="path5904" d="M73.259,81.59C74.408,80.441 88.773,80.728 95.38,70.386C101.988,60.044 102.563,45.966 102.563,45.966L73.259,81.59Z" style="fill:rgb(68,49,41);fill-rule:nonzero;"/>
+                                <path id="path5906" d="M136.175,87.623C136.175,87.623 101.126,89.06 95.668,70.386C90.209,51.712 122.673,55.447 122.673,55.447L136.175,87.623Z" style="fill:rgb(68,49,41);fill-rule:nonzero;"/>
+                            </g>
+                            <path id="path5912" d="M274.075,85.325L280.108,60.331L295.334,50.563C295.334,50.563 313.433,45.966 322.627,52.861C331.82,59.756 337.278,72.397 337.278,72.397L336.991,91.358L295.334,68.95L274.075,85.325Z" style="fill:rgb(68,49,41);fill-rule:nonzero;"/>
+                            <ellipse id="path5914" cx="313.002" cy="66.795" rx="6.464" ry="6.751" style="fill:rgb(86,64,55);"/>
+                            <ellipse id="path5914-1" cx="324.781" cy="75.27" rx="2.873" ry="2.729" style="fill:rgb(86,64,55);"/>
+                            <g id="g5962" transform="matrix(1,0,0,1,199.954,3.73477)">
+                                <ellipse id="path5931" cx="89.527" cy="90.389" rx="1.76" ry="2.837" style="fill:rgb(86,64,55);"/>
+                                <ellipse id="path5931-4" cx="122.386" cy="90.496" rx="1.76" ry="2.837" style="fill:rgb(86,64,55);"/>
+                                <ellipse id="path5948" cx="106.441" cy="100.408" rx="9.624" ry="7.613" style="fill:rgb(86,64,55);"/>
+                                <g id="path5956" transform="matrix(1,0,0,1.17277,0,-18.4143)">
+                                    <ellipse cx="106.585" cy="99.402" rx="9.768" ry="7.182" style="fill:rgb(212,191,162);"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <g transform="matrix(1.09557,0,0,1.09557,7.16561,103.309)">
+                <g id="Layer1">
+                    <g>
+                        <g transform="matrix(0.920694,0,0,1,12.977,-14.4241)">
+                            <path d="M84.653,132.735L39.221,109.49L39.221,159.899L84.653,184.829L84.653,132.735Z" style="fill:rgb(16,124,254);"/>
+                        </g>
+                        <g transform="matrix(-0.901723,0,0,1,166.532,-14.4241)">
+                            <path d="M84.653,132.735L39.221,109.49L39.221,159.899L84.653,184.829L84.653,132.735Z" style="fill:rgb(16,124,254);"/>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

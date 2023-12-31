@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Reading Data Details</title>
+</head>
+<body>
+<h1>Reading Data Details</h1>
+
+<div th:if="${readingData != null}">
+    <p><strong>ISBN:</strong> <span th:text="${readingData.bookIsbn}"></span></p>
+    <p><strong>Started Date:</strong> <span th:text="${readingData.startedDate}"></span></p>
+    <p><strong>Finished Date:</strong> <span th:text="${readingData.finishedDate}"></span></p>
+    <p><strong>Status:</strong> <span th:text="${readingData.status}"></span></p>
+    <p><strong>Current Page:</strong> <span th:text="${readingData.currentPage}"></span></p>
+    <p><strong>Rating:</strong> <span th:text="${readingData.rating}"></span></p>
+    <p><strong>Favorite:</strong> <span th:text="${readingData.favorite} ? 'Yes' : 'No'"></span></p>
+</div>
+
+<div th:if="${readingData == null}">
+    <p>No reading data found for the given ISBN.</p>
+</div>
+</body>
+</html>

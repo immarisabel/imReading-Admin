@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<div th:insert="~{fragments/header :: head}"></div>
+<style>
+    /* Add some basic styles for the flex grid */
+    .bookContainer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 20px; /* Add margin to separate the two sets of books */
+    }
+
+    .bookThumbnail {
+        width: 180px;
+        height: auto;
+        cursor: pointer;
+        border-radius:10px;
+    }
+ .lastBooksThumbnail {
+        width: 100px;
+        height: auto;
+        cursor: pointer;
+        border-radius:10px;
+    }
+    .progressBar {
+        width: 100%;
+        height: 10px;
+        background-color: #eee;
+        border-radius: 5px;
+        margin-top: 5px;
+        overflow: hidden;
+    }
+
+    .progressBarInner {
+        height: 100%;
+        width: 0;
+        background-color: #4caf50;
+    }
+</style>
+<body onload="populateDropdown();">
+
+<main class="grid-container-fullwidth">
+    <header class="grid-item">
+       <a href="/home"> <img src="/logo.svg" class="logo"> </a>
+        <nav th:replace="~{fragments/nav :: navFragment}"></nav>
+    </header>
+    <section id="content" class="grid-item double-height">
+        <!-- START OF CONTENT-->
+
+        <div th:replace="~{fragments/search-bar :: search}"></div>
+
+        <div id="currentlyReadingGrid" class="bookContainer"></div>
+
+
+
+
+        <!-- END OF CONTENT-->
+    </section>
+
+    <script th:inline="javascript">
+        // Function to fetch currently reading books using the provided token
+          async function fetchCurrentlyReadingBooks() {
+              const loginEndpoint = '';
+              const booksEndpoint = '';
+
+              // Replace with your actual username and password
+              const credentials = {
+                  username: '',
+                  password: ''
+              };
+
+              try {
+                  // Step 1: Login to get the token
+                  const loginResponse = await fetch(loginEndpoint, {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify(credentials)
+                  });
+
+                  const loginData = await loginResponse.json();
+                  const token = loginData.token;
+
+                  // Step 2: Use the token to fetch currently reading books
+                  const booksResponse = await fetch(booksEndpoint, {
+                      headers: {
+                          'Authorization': `Bearer ${token}`
+                      }
+                  });
+
+                  const booksData = await booksResponse.json();
+                  const currentlyReadingBooks = filterCurrentlyReadingBooks(booksData);
+                  displayCRBooks(currentlyReadingBooks);
+              } catch (error) {
+                  console.error('Error fetching currently reading books:', error);
+              }
+          }
+
+          // Function to filter books by the 'READING' status
+          function filterCurrentlyReadingBooks(books) {
+              return books.filter(book => book.readingData && book.readingData.status === 'READING');
+          }
+
+          // Function to display currently reading books in the flex grid
+          function displayCRBooks(books) {
+              const currentlyReadingGrid = document.getElementById('currentlyReadingGrid');
+
+              books.forEach(book => {
+                  const bookThumbnail = document.createElement('img');
+
+                  // Check if the thumbnail URL is valid
+                  if (book.thumbnailUrl) {
+                      bookThumbnail.src = book.thumbnailUrl;
+                      bookThumbnail.alt = book.title;
+                      bookThumbnail.className = 'bookThumbnail';
+
+                      // Create a link around the thumbnail, linking to the book page
+                      const bookLink = document.createElement('a');
+                      bookLink.href = `public/book/${book.isbn}`; // Replace with the actual path
+                      bookLink.appendChild(bookThumbnail);
+
+                      // Create a progress bar based on pages and current page
+                      const progressBar = document.createElement('div');
+                      progressBar.className = 'progressBar';
+
+                      const progressBarInner = document.createElement('div');
+                      progressBarInner.className = 'progressBarInner';
+                      const progressPercentage = (book.readingData.currentPage / book.pages) * 100;
+                      progressBarInner.style.width = `${progressPercentage}%`;
+
+                      progressBar.appendChild(progressBarInner);
+
+                      // Append the link, progress bar, and thumbnail to the book grid
+                      bookLink.appendChild(progressBar);
+                      currentlyReadingGrid.appendChild(bookLink);
+                  } else {
+                      console.error('Invalid thumbnail URL for book:', book.title);
+                  }
+              });
+          }
+
+          // Call the fetchCurrentlyReadingBooks function when the page loads
+          document.addEventListener('DOMContentLoaded', fetchCurrentlyReadingBooks);
+        </script>
+</main>
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

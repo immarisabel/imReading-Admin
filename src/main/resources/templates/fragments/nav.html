@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="navFragment">
+<nav>
+    <select class="main-nav" id="linkDropdown">
+        <option>navigation</option>
+    </select>
+</nav>
+
+
+    <script>
+        // Function to populate the dropdown with active links
+        function populateDropdown() {
+            var dropdown = document.getElementById("linkDropdown");
+
+            // Fetch active links from your Spring Boot controller endpoint
+            fetch("/public/links")
+                .then(response => response.json())
+                .then(data => {
+                    // Check if data is an array
+                    if (Array.isArray(data)) {
+                        // Clear existing options
+                        dropdown.innerHTML = "";
+
+                        // Add the default "navigation" option
+                        var defaultOption = document.createElement("option");
+                        defaultOption.value = "";
+                        defaultOption.textContent = "navigation";
+                        dropdown.appendChild(defaultOption);
+
+                        // Populate the dropdown with active links
+                        data.forEach(link => {
+                            var option = document.createElement("option");
+                            option.value = link.url; // Set the URL as the option value
+                            option.textContent = link.name;
+                            dropdown.appendChild(option);
+                        });
+                    } else {
+                        console.error("Data is not an array:", data);
+                    }
+                })
+                .catch(error => console.error("Error fetching data:", error));
+        }
+
+        // Function to handle the dropdown change event
+        function handleDropdownChange() {
+            var dropdown = document.getElementById("linkDropdown");
+            var selectedUrl = dropdown.value; // Get the selected URL
+
+            if (selectedUrl) {
+                window.location.href = selectedUrl; // Navigate to the selected URL
+            }
+        }
+
+        // Attach the change event handler to the dropdown
+        document.getElementById("linkDropdown").addEventListener("change", handleDropdownChange);
+    </script>
+
+
+</div>

@@ -1,0 +1,123 @@
+
+.text {
+    color: var(--color-1);
+    font-family: 'Quicksand', sans-serif;
+}
+
+.light-text {
+    color: var(--light-text);
+}
+
+input, label, button {
+    margin: 0.5rem;
+}
+
+label {
+    display: inline-block;
+    width: 80px;  /* Adjust the width as needed for alignment */
+}
+
+input, select {
+    width: calc(80% - 1rem);
+    padding: .5rem;
+    border: 1px solid var(--light-text);
+    background-color: var(--yellow);
+    border-radius: 5px;
+}
+
+
+option:checked {
+    background-color: var(--color-3);
+    color: white;
+    padding:.5rem;
+    border-radius:10px;
+margin-top:.5rem;
+
+}
+
+
+option:not(:checked) {
+padding:.5rem;
+border-radius:10px;
+margin-top:.5rem;
+
+}
+
+button {
+    background-color: var(--color-2);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.button {
+    background-color: var(--color-2);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+
+button:hover {
+    background-color: var(--color-3);
+}
+
+.button:hover {
+    background-color: var(--color-3);
+}
+
+.button-secondary {
+    background-color: var(--color-1) !important;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Quicksand', sans-serif;
+}
+.button-secondary:hover {
+    background-color: var(--color-3);
+}
+
+/*   progress bars */
+
+.progress {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 290486px;
+  display: block;
+  height: 1rem;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+}
+
+.progress::-webkit-progress-bar {
+  background-color: #dbdbdb;
+}
+
+.progress::-webkit-progress-value {
+  background-color: var(--french-rose);
+}
+
+.progress::-moz-progress-bar {
+  background-color: var(--french-rose);
+}
+
+.progress::-ms-fill {
+  background-color: var(--french-rose);
+  border: none;
+}
+.progress.is-small {
+  height: 0.75rem;
+}
+
+}
